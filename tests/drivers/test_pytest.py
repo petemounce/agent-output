@@ -113,3 +113,9 @@ def test_duration() -> None:
     data = decode_output(proc)
     assert "duration_ms" in data
     assert data["duration_ms"] > 0
+
+
+def test_sections_omitted_by_default() -> None:
+    proc = run_with("pytest", fixture("test_failing_with_stdout.py"))
+    data = decode_output(proc)
+    assert "sections" not in data["failures"][0]
